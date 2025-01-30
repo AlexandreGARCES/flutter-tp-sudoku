@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sudoku_starter/gridInterne.dart';
 
 class Grid extends StatelessWidget {
   const Grid({super.key});
@@ -17,13 +18,14 @@ class Grid extends StatelessWidget {
           height: boxSize * 3,
           child: GridView.count(
             crossAxisCount: 3,
-            children: List.generate(9, (x) {
+            children: List.generate(9, (index) {
               return Container(
                 width: boxSize,
                 height: boxSize,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueAccent),
+                  border: Border.all(color: Colors.blueAccent, width: 1.0),
                 ),
+                child: const GridInterne(),
               );
             }),
           ),
