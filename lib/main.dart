@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sudoku_starter/game.dart';
 
-import 'grid.dart';
+import 'sudokuGrid.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Grid(),
+      home: const SudokuGrid(),
     );
   }
 }
