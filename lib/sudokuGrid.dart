@@ -11,6 +11,7 @@ class SudokuGrid extends StatefulWidget {
 
 class _SudokuGridState extends State<SudokuGrid> {
   late Future<Puzzle> _puzzleFuture;
+  int? _selectedCellIndex; // Variable pour suivre la cellule sélectionnée
 
   @override
   void initState() {
@@ -52,13 +53,24 @@ class _SudokuGridState extends State<SudokuGrid> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                   ),
-                  itemCount: 9,
-                  itemBuilder: (context, index) {
+                  itemCount: 9, // 9 blocs de 3x3
+                  itemBuilder: (context, blockIndex) {
                     return Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.blue, width: borderSize),
                       ),
-                      child: GridInterne(puzzle: snapshot.data!, blockIndex: index),
+                      child: GridInterne(
+                        puzzle: snapshot.data!,
+                        blockIndex: blockIndex,
+                        selectedCellIndex: _selectedCellIndex,
+                        onCellSelected: (int cellIndex) {
+                          setState(() {
+                            // Calculer l'indice global de la cellule sélectionnée
+                            int globalCellIndex = blockIndex * 9 + cellIndex;
+                            _selectedCellIndex = globalCellIndex;
+                          });
+                        },
+                      ),
                     );
                   },
                 ),
